@@ -1,0 +1,2149 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "contact": {
+      "email": "allen.gammel@mail.weir"
+    },
+    "description": "This API is used to interact with SyteLine",
+    "license": {
+      "name": "No license",
+      "url": "https://global.weir"
+    },
+    "title": "Paperless Manufacturing",
+    "version": "1.0.3-oas3"
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/intolerance/mfg-paperless/1.0.0",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/authenticate": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserLoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully authenticated user.",
+            "schema": {
+              "$ref": "#/definitions/UserLoginResponse"
+            }
+          },
+          "401": {
+            "description": "Failed to authenticate user.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Authentication Methods"
+        ],
+        "description": "Allows the user to authenticate with SyteLine to retrieve an access code.",
+        "summary": "Authenticates the User to access the portal and grant access to the SyteLEAN Web Service \"On-behalf Of\""
+      }
+    },
+    "/inventory/warehouses/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of available warehouses",
+            "schema": {
+              "$ref": "#/definitions/WarehouseListResponse"
+            }
+          },
+          "401": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Inventory Methods"
+        ],
+        "description": "Retreives a list of warehouses available to the User",
+        "summary": "Retreives a list of warehouses available to the User"
+      }
+    },
+    "/inventory/{warehouse}/locations/{location}/items/{item}/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Warehouse the Location exists within",
+            "in": "path",
+            "name": "warehouse",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Location the Items exist within",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Specific Item in the Location",
+            "in": "path",
+            "name": "item",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing of Items successful",
+            "schema": {
+              "$ref": "#/definitions/ItemInventoryDetails"
+            }
+          },
+          "401": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Inventory Methods"
+        ],
+        "description": "Lists Item Inventory Details for the given Warehouse, Location & Item combination",
+        "summary": "Lists Item Inventory Details for the given Warehouse, Location & Item combination"
+      }
+    },
+    "/inventory/{warehouse}/locations/{location}/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Warehouse the Location exists within",
+            "in": "path",
+            "name": "warehouse",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Location the Items exist within",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Listing of Items successful",
+            "schema": {
+              "$ref": "#/definitions/LocationItemInventoryDetails"
+            }
+          },
+          "401": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Inventory Methods"
+        ],
+        "description": "Lists Item Inventory Details for the given Warehouse & Location combination",
+        "summary": "Lists Item Inventory Details for the given Warehouse & Location combination"
+      }
+    },
+    "/inventory/{warehouse}/locations/{location}/validate": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Warehouse the Location exists within",
+            "in": "path",
+            "name": "warehouse",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Location to validate",
+            "in": "path",
+            "name": "location",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Validation Result",
+            "schema": {
+              "$ref": "#/definitions/LocationValidationResponse"
+            }
+          },
+          "401": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Inventory Methods"
+        ],
+        "description": "Validates that a specific Location exists for a Warehouse.",
+        "summary": "Validates that a specific Location exists for a Warehouse"
+      }
+    },
+    "/job/create": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Order Request Details",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JobOrderCreateRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job Order was created succesfully",
+            "schema": {
+              "$ref": "#/definitions/JobOrderCreateResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Creates a Job Order in SyteLine with the defined properties.",
+        "summary": "Creates a Job Order in SyteLine"
+      }
+    },
+    "/job/{jobNumber}/materials/issue": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialIssueRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Issued materials successfully",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialsIssuedResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Issues material to the given Job Order/Serial Number",
+        "summary": "Issues material to the given Job Order/Serial Number"
+      }
+    },
+    "/job/{jobNumber}/materials/issued": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved Job Materials List Response Successfully",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialsListResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Determines if all of the materials for a job order have been issued.",
+        "summary": "Determines if all of the materials for a job order have been issued."
+      }
+    },
+    "/job/{jobNumber}/materials/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved Job Materials List Response Successfully",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialsListResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Retrieves the flattended (consolidated) BOM for the given Job Order number.",
+        "summary": "Retrieves the flattened BOM for the given Job Order number"
+      }
+    },
+    "/job/{jobNumber}/materials/{serialNumber}/issue": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Serial Number referenced on Job Order",
+            "in": "path",
+            "name": "serialNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobSerialNumberMaterialIssueRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Issued materials successfully",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialsIssuedResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Issues material to the given Job Order/Serial Number",
+        "summary": "Issues material to the given Job Order/Serial Number"
+      }
+    },
+    "/job/{jobNumber}/materials/{serialNumber}/issued": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Serial Number referenced on Job Order",
+            "in": "path",
+            "name": "serialNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved Job Materials List Response Successfully",
+            "schema": {
+              "$ref": "#/definitions/JobMaterialsListResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Determines if all of the materials for a serial number have been issued.",
+        "summary": "Determines if all of the materials for a serial number have been issued."
+      }
+    },
+    "/job/{jobNumber}/operations/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "SyteLine Job Order",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job Order exists and Operations List was successfully generated",
+            "schema": {
+              "$ref": "#/definitions/JobOperationsListResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Retreives and returns the Operation Details for a given Job Order",
+        "summary": "Returns a list of Operations for the given Job Order"
+      }
+    },
+    "/job/{jobNumber}/operations/{operation}/complete": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Operation number",
+            "in": "path",
+            "name": "operation",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobOperationCompleteResquest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Completed operation successfully",
+            "schema": {
+              "$ref": "#/definitions/JobOperationCompleteResponse"
+            }
+          },
+          "401": {
+            "description": "Completed operation successfully",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Completes a Job Operation in SyteLine",
+        "summary": "Completes a Job Operation in SyteLine"
+      }
+    },
+    "/job/{jobNumber}/operations/{operation}/note": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Operation number",
+            "in": "path",
+            "name": "operation",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retreived the Job Operation Note",
+            "schema": {
+              "$ref": "#/definitions/JobOperationGetNoteResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Retreives the first note text available for a Job Operation. If no existing note, return back \"No note available\".",
+        "summary": "Gets the note field for a Job Operation"
+      },
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Operation number",
+            "in": "path",
+            "name": "operation",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/JobOperationAppendNoteRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retreived the Job Operation Note",
+            "schema": {
+              "$ref": "#/definitions/JobOperationGetNoteResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Appends specificed note text to the first existing note within the specific Job Operation, if existing. If a note does not exist, create a new note marked as Internal.",
+        "summary": "Appends a note to the Job Operation"
+      }
+    },
+    "/job/{jobNumber}/reports/packet": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Order Number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Job Operations Listing Report Request Successful",
+            "schema": {
+              "$ref": "#/definitions/GeneralReportResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Requests the PDF version of the Job Operations Listing Report:\n\n* The SyteLEAN Web Service Send Report fields to the end point\n\n* End point will submit background task to run report \n\n* End point will immediately return a URL to watch for report output\n\n* Once report is available browsing to the URL will serve the PDF\n",
+        "summary": "Requests the PDF version of the Job Operations Listing Report"
+      }
+    },
+    "/job/{jobNumber}/reports/traceability": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Order Number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Weir Lot/Serial Traceability Report Request Successful",
+            "schema": {
+              "$ref": "#/definitions/GeneralReportResponse"
+            }
+          },
+          "401": {
+            "description": "Not authorized response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Requests the PDF version of the Weir Lot/Serial Traceability Report:\n\n* The SyteLEAN Web Service Send Report fields to the end point\n\n* End point will submit background task to run report \n\n* End point will immediately return a URL to watch for report output\n\n* Once report is available browsing to the URL will serve the PDF\n",
+        "summary": "Requests the PDF version of the Weir Lot/Serial Traceability Report"
+      }
+    },
+    "/job/{jobNumber}/status": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine Job Order number",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Status of the Job Order in SyteLine",
+            "schema": {
+              "$ref": "#/definitions/JobOrderStatusResponse"
+            }
+          },
+          "403": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Job Order Methods"
+        ],
+        "description": "Returns the Job Order status from SyteLine, such as Released, Stopped, Complete, etc.",
+        "summary": "Returns the Job Orders status from SyteLine"
+      }
+    },
+    "/view/item/{item}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Item to retreive data for",
+            "in": "path",
+            "name": "item",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data view was successfully retreived",
+            "schema": {
+              "$ref": "#/definitions/ItemDataView"
+            }
+          },
+          "401": {
+            "description": "Not authorized response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "DataView Methods"
+        ],
+        "description": "Retreives data fields from the Item Master form in SyteLine about a given item",
+        "summary": "Item Master dataview"
+      }
+    },
+    "/view/job/{jobNumber}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "Job Number to retreive data for",
+            "in": "path",
+            "name": "jobNumber",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Data view was successfully retreived",
+            "schema": {
+              "$ref": "#/definitions/JobOrderDataView"
+            }
+          },
+          "401": {
+            "description": "Not authorized response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "DataView Methods"
+        ],
+        "description": "Retreives data fields from the Job Orders form in SyteLine about a given item",
+        "summary": "Job Order dataview"
+      }
+    },
+    "/workbench/{plannerCode}/list": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "SyteLine Authorization Token",
+            "in": "header",
+            "name": "X-SL-Token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "description": "The SyteLine planner code. Used to reference work bench.",
+            "in": "path",
+            "name": "plannerCode",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available Items retrieval successful",
+            "schema": {
+              "$ref": "#/definitions/WorkBenchItemsResponse"
+            }
+          },
+          "401": {
+            "description": "Not authenticated response",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error occurred response.",
+            "schema": {
+              "$ref": "#/definitions/FailureResponse"
+            }
+          }
+        },
+        "tags": [
+          "Workbench Methods"
+        ],
+        "description": "Retreives the list of Items available to manufacture in the Work Bench for a given planner code. (Work Bench method)",
+        "summary": "Lists the Items available to manufacture for a work bench/cell"
+      }
+    }
+  },
+  "definitions": {
+    "FailureResponse": {
+      "description": "Generic Failure Response",
+      "properties": {
+        "correlationId": {
+          "description": "Correlating transaction id, if applicable.",
+          "example": "924492df-8d94-4d05-a05a-07c0e35ae0f9",
+          "type": "string"
+        },
+        "message": {
+          "description": "Describes the failure.",
+          "example": "Unable to authenticate the user",
+          "type": "string"
+        },
+        "occurredAt": {
+          "description": "ISO-8601 Formated date",
+          "example": "2018-09-26T17:18:21.554333+00:00",
+          "type": "string"
+        },
+        "service": {
+          "description": "Describes the responding service.",
+          "example": "SyteLEAN Web Service",
+          "type": "string"
+        },
+        "userNotification": {
+          "description": "If the Web Browser should inform the User of the error or not",
+          "example": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "correlationId",
+        "message",
+        "occurredAt",
+        "service",
+        "userNotification"
+      ],
+      "type": "object"
+    },
+    "GeneralReportResponse": {
+      "description": "General Report Response",
+      "properties": {
+        "reportUrl": {
+          "description": "URL to retreive the document",
+          "example": "http://server.com/reports/packet/1908VAS019",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reportUrl"
+      ],
+      "type": "object"
+    },
+    "ItemDataView": {
+      "description": "Item Data View",
+      "properties": {
+        "description": {
+          "description": "Item description",
+          "example": "PLUG VA/1X2 SP150WU/LT",
+          "type": "string"
+        },
+        "drawingNumber": {
+          "description": "Drawing revision",
+          "example": "1A14483-REV C",
+          "type": "string"
+        },
+        "familyCode": {
+          "description": "Family Code",
+          "example": "PV/1x2",
+          "type": "string"
+        },
+        "item": {
+          "description": "SyteLine Item",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "itemStockType": {
+          "description": "Item Stock Type",
+          "example": "MTS",
+          "type": "string"
+        },
+        "lotSize": {
+          "description": "Item Lot Size",
+          "example": 1,
+          "type": "number"
+        },
+        "lotTracked": {
+          "description": "Lot Tracked Item?",
+          "example": false,
+          "type": "boolean"
+        },
+        "plannerCode": {
+          "description": "Planner Code",
+          "example": "PV1",
+          "type": "string"
+        },
+        "productCode": {
+          "description": "Product Code",
+          "example": "PV",
+          "type": "string"
+        },
+        "productFamily": {
+          "description": "Product Family",
+          "example": "Plug Valves",
+          "type": "string"
+        },
+        "quantityWIP": {
+          "description": "Quantity in WIP",
+          "example": 65,
+          "type": "number"
+        },
+        "revision": {
+          "description": "Item Revision",
+          "example": "C",
+          "type": "string"
+        },
+        "safetyStock": {
+          "description": "Safety Stock",
+          "example": 711,
+          "type": "number"
+        },
+        "serialTrack": {
+          "description": "Serial Tracked Item?",
+          "example": true,
+          "type": "boolean"
+        },
+        "valueStream": {
+          "description": "Value Stream",
+          "example": "Valves",
+          "type": "string"
+        }
+      },
+      "required": [
+        "description",
+        "drawingNumber",
+        "familyCode",
+        "item",
+        "itemStockType",
+        "lotSize",
+        "lotTrack",
+        "plannerCode",
+        "productCode",
+        "productFamily",
+        "quantityWIP",
+        "revision",
+        "safetyStock",
+        "serialTrack",
+        "valueStream"
+      ],
+      "type": "object"
+    },
+    "ItemInventoryDetails": {
+      "description": "Details for an item within a Location",
+      "properties": {
+        "item": {
+          "description": "Corresponding Item number in SyteLine",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "itemTraceability": {
+          "$ref": "#/definitions/ItemTraceabilityDetail"
+        },
+        "locationOnHand": {
+          "description": "On Hand quantity for the Item in the specific Location",
+          "example": 53,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item",
+        "itemTraceability",
+        "locationOnHand"
+      ],
+      "type": "object"
+    },
+    "ItemLotTraceabilityDetail": {
+      "description": "Serialized item traceability details",
+      "properties": {
+        "expirationDate": {
+          "description": "Expiration Date, if available",
+          "example": "1/1/2020",
+          "type": "string"
+        },
+        "lot": {
+          "description": "Lot for the Item",
+          "example": "AB123",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Quantity of Lot for the Item",
+          "example": 50,
+          "type": "number"
+        }
+      },
+      "required": [
+        "expirationDate",
+        "lot",
+        "quantity"
+      ],
+      "type": "object"
+    },
+    "ItemSerializedTraceabilityDetail": {
+      "description": "Serialized item traceability details",
+      "properties": {
+        "serialNumber": {
+          "description": "Serial number for the item",
+          "example": "1904VAS001-2",
+          "type": "string"
+        }
+      },
+      "required": [
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "ItemTraceabilityDetail": {
+      "description": "Item Traceability Details",
+      "properties": {
+        "lotTracked": {
+          "description": "Is the Item Lot Tracked in SyteLine?",
+          "example": true,
+          "type": "boolean"
+        },
+        "lots": {
+          "description": "List of Lots",
+          "items": {
+            "$ref": "#/definitions/ItemLotTraceabilityDetail"
+          },
+          "type": "array"
+        },
+        "serialNumbers": {
+          "description": "List of Serial Numbers",
+          "items": {
+            "$ref": "#/definitions/ItemSerializedTraceabilityDetail"
+          },
+          "type": "array"
+        },
+        "serialTracked": {
+          "description": "Is the Item Serial Tracked in SyteLine?",
+          "example": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "lotTracked",
+        "lots",
+        "serialNumbers",
+        "serialTracked"
+      ],
+      "type": "object"
+    },
+    "JobMaterialIssueDetail": {
+      "description": "Job Material Issue Detail",
+      "properties": {
+        "expirationDate": {
+          "description": "If lot, supply the expiration date if required.",
+          "type": "string"
+        },
+        "item": {
+          "description": "Material Item to issue",
+          "example": "1P14480",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location the item resides",
+          "example": "CMKT-04",
+          "type": "string"
+        },
+        "lot": {
+          "description": "If applicable, the items Lot",
+          "example": "AB123-4",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Quantity to issue. If serial number the qty must be 1.",
+          "example": 3,
+          "type": "number"
+        },
+        "serialNumber": {
+          "description": "If applicable, the items Serial Number",
+          "type": "string"
+        },
+        "warehouse": {
+          "description": "Warehouse the location resides",
+          "example": "MAIN",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expirationDate",
+        "item",
+        "location",
+        "lot",
+        "quantity",
+        "serialNumber",
+        "warehouse"
+      ],
+      "type": "object"
+    },
+    "JobMaterialIssueRequest": {
+      "description": "Material Issue Request",
+      "properties": {
+        "issueMaterials": {
+          "description": "Materials to issue to the job/serial number",
+          "items": {
+            "$ref": "#/definitions/JobMaterialIssueDetail"
+          },
+          "type": "array"
+        },
+        "jobOrder": {
+          "description": "Job Order to issue materials to.",
+          "example": "1904VAS004",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueMaterials",
+        "jobOrder"
+      ],
+      "type": "object"
+    },
+    "JobMaterialItemDetail": {
+      "description": "Job Material Item Details",
+      "properties": {
+        "materialItem": {
+          "description": "SyteLine Material Item number",
+          "example": "1P14480",
+          "type": "string"
+        },
+        "materialItemTraceability": {
+          "$ref": "#/definitions/ItemTraceabilityDetail"
+        },
+        "materialType": {
+          "description": "Material Type from Items -- Other, Material, Fixture, etc.",
+          "example": "Material",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Job Operation number that the material is allocated to.",
+          "example": 10,
+          "type": "number"
+        },
+        "quantityIssued": {
+          "description": "Quantity of Material Item that has been issued to the Job / Serial Number",
+          "example": 1,
+          "type": "number"
+        },
+        "quantityPer": {
+          "description": "Quantity of Material Item per Unit",
+          "example": 1,
+          "type": "number"
+        },
+        "quantityRequired": {
+          "description": "Quantity of Material Item required to satisify each Job Item",
+          "example": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "materialItem",
+        "materialItemTraceability",
+        "materialType",
+        "operation",
+        "quantityIssued",
+        "quantityPer",
+        "quantityRequired"
+      ],
+      "type": "object"
+    },
+    "JobMaterialsIssuedResponse": {
+      "description": "Job Materials Issued Response",
+      "properties": {
+        "issuedFully": {
+          "description": "If the job/serial number is fully issued or not",
+          "example": true,
+          "type": "boolean"
+        },
+        "jobNumber": {
+          "description": "SyteLine Job Number",
+          "example": "1904VAS001",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issuedFully",
+        "jobNumber"
+      ],
+      "type": "object"
+    },
+    "JobMaterialsListResponse": {
+      "description": "Flattened BOM for the Job Item",
+      "properties": {
+        "jobItemTraceability": {
+          "$ref": "#/definitions/ItemTraceabilityDetail"
+        },
+        "jobMaterialItems": {
+          "description": "List of Job Materials",
+          "items": {
+            "$ref": "#/definitions/JobMaterialItemDetail"
+          },
+          "type": "array"
+        },
+        "jobNumber": {
+          "description": "SyteLine Job Order Number",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "jobQuantity": {
+          "description": "Job Order Release quantity",
+          "example": 10,
+          "type": "number"
+        }
+      },
+      "required": [
+        "jobItemTraceability",
+        "jobMaterialItems",
+        "jobNumber",
+        "jobQuantity"
+      ],
+      "type": "object"
+    },
+    "JobOperationAppendNoteRequest": {
+      "description": "Job Operation Note Append Request",
+      "properties": {
+        "jobNumber": {
+          "description": "SyteLine Job Number",
+          "example": "1906VAS001",
+          "type": "string"
+        },
+        "note": {
+          "description": "Quantity that was completed",
+          "example": "IDENTIFY PART PER ENGINEERING DRAWING.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Job Operation the note belongs to",
+          "example": 30,
+          "type": "number"
+        }
+      },
+      "required": [
+        "jobNumber",
+        "note",
+        "operation"
+      ],
+      "type": "object"
+    },
+    "JobOperationCompleteResponse": {
+      "description": "Job Operation Complete Response",
+      "properties": {
+        "jobNumber": {
+          "description": "SyteLine Job Number",
+          "example": "1906VAS001",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "Quantity that was completed",
+          "example": 1,
+          "type": "number"
+        },
+        "success": {
+          "description": "Successfully completed the operation or not",
+          "example": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "jobNumber",
+        "quantity",
+        "success"
+      ],
+      "type": "object"
+    },
+    "JobOperationCompleteResquest": {
+      "description": "Job Order Status Response",
+      "properties": {
+        "jobNumber": {
+          "description": "The Job Number to be used when creating the Job Order",
+          "example": "1903VA0001",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The Job Operation to complete",
+          "example": 20,
+          "type": "number"
+        },
+        "quantity": {
+          "description": "The quantity completed",
+          "example": 1,
+          "type": "number"
+        }
+      },
+      "required": [
+        "jobNumber",
+        "operation",
+        "quantity"
+      ],
+      "type": "object"
+    },
+    "JobOperationDetail": {
+      "description": "Job Operation Item Details",
+      "properties": {
+        "laborHours": {
+          "description": "Labor Hours",
+          "example": 0.25,
+          "type": "number"
+        },
+        "machineHours": {
+          "description": "Machine Hours",
+          "example": 1.25,
+          "type": "number"
+        },
+        "operationNumber": {
+          "description": "Operation Number",
+          "example": 10,
+          "type": "number"
+        },
+        "setupHours": {
+          "description": "Setup Hours",
+          "example": 0.5,
+          "type": "number"
+        },
+        "setupResourceGroup": {
+          "description": "Setup Resource Group",
+          "example": "6100",
+          "type": "string"
+        },
+        "workCenter": {
+          "description": "Work Center",
+          "example": "VAS",
+          "type": "string"
+        }
+      },
+      "required": [
+        "laborHours",
+        "machineHours",
+        "operationNumber",
+        "setupHours",
+        "setupResourceGroup",
+        "workCenter"
+      ],
+      "type": "object"
+    },
+    "JobOperationGetNoteResponse": {
+      "description": "Job Operation Note Response",
+      "properties": {
+        "jobNumber": {
+          "description": "SyteLine Job Number",
+          "example": "1906VAS001",
+          "type": "string"
+        },
+        "note": {
+          "description": "Quantity that was completed",
+          "example": "IDENTIFY PART PER ENGINEERING DRAWING.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Job Operation the note belongs to",
+          "example": 30,
+          "type": "number"
+        },
+        "success": {
+          "description": "Successfully completed the operation or not",
+          "example": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "jobNumber",
+        "note",
+        "operation",
+        "success"
+      ],
+      "type": "object"
+    },
+    "JobOperationsListResponse": {
+      "description": "Job Operations List",
+      "properties": {
+        "item": {
+          "description": "Item",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "jobNumber": {
+          "description": "Job Number",
+          "example": "1904VAS001",
+          "type": "string"
+        },
+        "operationDetails": {
+          "description": "List of OperationDetails",
+          "items": {
+            "$ref": "#/definitions/JobOperationDetail"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "item",
+        "jobNumber",
+        "operationDetails"
+      ],
+      "type": "object"
+    },
+    "JobOrderCreateRequest": {
+      "description": "Job Order Creation Request",
+      "properties": {
+        "item": {
+          "description": "Corresponding Item number in SyteLine",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "jobNumber": {
+          "description": "The Job Number to be used when creating the Job Order. Using \"?\" should auto-fill the remaining digits.",
+          "example": "1903VA?",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity for the job",
+          "example": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item",
+        "jobNumber",
+        "quantity"
+      ],
+      "type": "object"
+    },
+    "JobOrderCreateResponse": {
+      "description": "Job Order Creation Response",
+      "properties": {
+        "item": {
+          "description": "Corresponding Item number in SyteLine",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "jobNumber": {
+          "description": "The Job Number to be used when creating the Job Order",
+          "example": "1903VAS001",
+          "type": "string"
+        },
+        "quantity": {
+          "description": "The quantity for the job",
+          "example": 1,
+          "type": "integer"
+        },
+        "serialNumbers": {
+          "description": "Serial Numbers that were generated",
+          "items": {
+            "$ref": "#/definitions/JobOrderSerialNumberDetail"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "item",
+        "jobNumber",
+        "quantity",
+        "serialNumbers"
+      ],
+      "type": "object"
+    },
+    "JobOrderDataView": {
+      "description": "Job Order Data View",
+      "properties": {
+        "completed": {
+          "description": "Completed Quantity",
+          "example": 1,
+          "type": "number"
+        },
+        "familyCode": {
+          "description": "Family Code",
+          "example": "PV/1x2",
+          "type": "string"
+        },
+        "item": {
+          "description": "SyteLine Item",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "jobDate": {
+          "description": "Job Date",
+          "format": "date",
+          "type": "string"
+        },
+        "jobDescription": {
+          "description": "Job Description",
+          "example": "PLUG VA/1X2 SP150WU/LT",
+          "type": "string"
+        },
+        "jobEndDate": {
+          "description": "Job End Date",
+          "format": "date",
+          "type": "string"
+        },
+        "jobNumber": {
+          "description": "Job Number",
+          "example": "1903VAS239",
+          "type": "string"
+        },
+        "jobStartDate": {
+          "description": "Job Start Date",
+          "format": "date",
+          "type": "string"
+        },
+        "plannerCode": {
+          "description": "Planner Code",
+          "example": "PV1",
+          "type": "string"
+        },
+        "released": {
+          "description": "Released Quantity",
+          "example": 5,
+          "type": "number"
+        },
+        "scrapped": {
+          "description": "Scrapped Quantity",
+          "example": 0,
+          "type": "number"
+        },
+        "serialNumbers": {
+          "description": "Serial Numbers associated with the job",
+          "items": {
+            "$ref": "#/definitions/JobOrderSerialNumberDetail"
+          },
+          "type": "array"
+        },
+        "status": {
+          "description": "Job Status",
+          "example": "Released",
+          "type": "string"
+        }
+      },
+      "required": [
+        "completed",
+        "familyCode",
+        "item",
+        "jobDate",
+        "jobDescription",
+        "jobEndDate",
+        "jobNumber",
+        "jobStartDate",
+        "plannerCode",
+        "released",
+        "scrapped",
+        "serialNumbers",
+        "status"
+      ]
+    },
+    "JobOrderSerialNumberDetail": {
+      "description": "Serial Number Detail",
+      "properties": {
+        "item": {
+          "description": "Item Number",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Serial Number",
+          "example": "1903VAS001-1",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item",
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "JobOrderStatusResponse": {
+      "description": "Job Order Status Response",
+      "properties": {
+        "jobNumber": {
+          "description": "The Job Number to be used when creating the Job Order",
+          "example": "1903VA0001",
+          "type": "string"
+        },
+        "status": {
+          "description": "The corresponding SyteLine Job Order Status. Return the status of \"Unreleased\" for jobs that do not exist",
+          "example": "Released",
+          "type": "string"
+        }
+      },
+      "required": [
+        "jobNumber",
+        "status"
+      ],
+      "type": "object"
+    },
+    "JobSerialNumberMaterialIssueRequest": {
+      "description": "Material Issue Request",
+      "properties": {
+        "issueMaterials": {
+          "description": "Materials to issue to the job/serial number",
+          "items": {
+            "$ref": "#/definitions/JobMaterialIssueDetail"
+          },
+          "type": "array"
+        },
+        "jobOrder": {
+          "description": "Job Order to issue materials to.",
+          "example": "1904VAS004",
+          "type": "string"
+        },
+        "serialNumber": {
+          "description": "Serial Number to issue materials to.",
+          "example": "1904VAS004-1",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueMaterials",
+        "jobOrder",
+        "serialNumber"
+      ],
+      "type": "object"
+    },
+    "LocationItemInventoryDetails": {
+      "description": "Item Details for a Location",
+      "properties": {
+        "items": {
+          "description": "Item Inventory Details",
+          "items": {
+            "$ref": "#/definitions/ItemInventoryDetails"
+          },
+          "type": "array"
+        },
+        "location": {
+          "description": "Location name",
+          "example": "CMKT-01",
+          "type": "string"
+        }
+      },
+      "required": [
+        "items",
+        "location"
+      ],
+      "type": "object"
+    },
+    "LocationValidationResponse": {
+      "description": "Location Validity Response",
+      "properties": {
+        "location": {
+          "description": "Warehouse location",
+          "example": "CMKT-01",
+          "type": "string"
+        },
+        "valid": {
+          "description": "If the Warehouse & Location combination exists or not",
+          "example": true,
+          "type": "boolean"
+        },
+        "warehouse": {
+          "description": "Warehouse the location exists in",
+          "example": "MAIN",
+          "type": "string"
+        }
+      },
+      "required": [
+        "location",
+        "valid",
+        "warehouse"
+      ],
+      "type": "object"
+    },
+    "UserLoginRequest": {
+      "properties": {
+        "pwd": {
+          "description": "SyteLEAN password",
+          "example": "my.pass.word",
+          "format": "password",
+          "type": "string"
+        },
+        "site": {
+          "description": "The targetted SyteLine instance",
+          "example": "HQ",
+          "type": "string"
+        },
+        "user": {
+          "description": "SyteLEAN Username",
+          "example": "WEB257700",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pwd",
+        "site",
+        "user"
+      ],
+      "type": "object"
+    },
+    "UserLoginResponse": {
+      "description": "Successful User login response",
+      "properties": {
+        "firstName": {
+          "example": "Allen",
+          "type": "string"
+        },
+        "groups": {
+          "description": "List of Groups",
+          "example": [
+            "Web_PaperlessOperator",
+            "Web_PaperlessScheduler",
+            "Web_PaperlessOperator_Valve"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "lastName": {
+          "example": "Gammel",
+          "type": "string"
+        },
+        "success": {
+          "example": true,
+          "type": "boolean"
+        },
+        "token": {
+          "description": "SyteLine Access Token",
+          "example": "xxxxx.yyyyy.zzzzz",
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "groups",
+        "lastName",
+        "success",
+        "token"
+      ],
+      "type": "object"
+    },
+    "WarehouseListResponse": {
+      "description": "Warehouse List Response",
+      "properties": {
+        "warehouses": {
+          "description": "Warehouse the location exists in",
+          "example": [
+            "MAIN",
+            "DCFW"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "warehouses"
+      ],
+      "type": "object"
+    },
+    "WorkBenchItemsResponse": {
+      "properties": {
+        "availableItems": {
+          "description": "Available Items on the Workbench",
+          "items": {
+            "$ref": "#/definitions/WorkBenchItemsResponseDetail"
+          },
+          "type": "array"
+        },
+        "workBench": {
+          "description": "Workbench the Available Items belong to",
+          "example": "VAS",
+          "type": "string"
+        }
+      },
+      "required": [
+        "availableItems",
+        "workBench"
+      ],
+      "type": "object"
+    },
+    "WorkBenchItemsResponseDetail": {
+      "properties": {
+        "item": {
+          "description": "Item from SyteLine",
+          "example": "1A14483",
+          "type": "string"
+        },
+        "lotSize": {
+          "description": "Lot Size from Items",
+          "example": 1,
+          "type": "number"
+        },
+        "scheduledDate": {
+          "description": "ISO-8601 Formated date",
+          "example": "2018-09-26T17:18:21.554333+00:00",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item",
+        "lotSize",
+        "scheduledDate"
+      ],
+      "type": "object"
+    }
+  },
+  "tags": [
+    {
+      "description": "Methods related to authenticating with the SyteLEAN Web Service",
+      "name": "Authentication Methods"
+    },
+    {
+      "description": "Methods related to Job Orders",
+      "name": "Job Order Methods"
+    },
+    {
+      "description": "Performs Inventory transactions",
+      "name": "Inventory Methods"
+    },
+    {
+      "description": "Methods for accessing the Workbench",
+      "name": "Workbench Methods"
+    },
+    {
+      "description": "Methods that return data from various forms.",
+      "name": "DataView Methods"
+    }
+  ],
+  "x-components": {}
+}
