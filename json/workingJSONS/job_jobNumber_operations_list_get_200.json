@@ -1,0 +1,14 @@
+{
+  "jobNumber": "1904VAS001",
+  "item": "1A14483",
+  "operationDetails": [
+    {
+      "workCenter": "VAS",
+      "laborHours": 0.25,
+      "machineHours": 1.25,
+      "setupHours": 0.5,
+      "setupResourceGroup": "6100",
+      "operationNumber": 10
+    }
+  ]
+}

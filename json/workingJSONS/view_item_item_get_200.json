@@ -1,0 +1,17 @@
+{
+  "item": "1A14483",
+  "description": "PLUG VA/1X2 SP150WU/LT",
+  "drawingNumber": "1A14483-REV C",
+  "revision": "C",
+  "productFamily": "Plug Valves",
+  "productCode": "PV",
+  "familyCode": "PV/1x2",
+  "itemStockType": "MTS",
+  "valueStream": "Valves",
+  "lotTracked": true,
+  "serialTrack": true,
+  "lotSize": 1,
+  "plannerCode": "PV1",
+  "quantityWIP": 65,
+  "safetyStock": 711
+}

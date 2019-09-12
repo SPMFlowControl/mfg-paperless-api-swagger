@@ -1,0 +1,7 @@
+{
+  "correlationId": "924492df-8d94-4d05-a05a-07c0e35ae0f9",
+  "occurredAt": "2018-09-26T17:18:21.554333+00:00",
+  "message": "Unable to authenticate the user",
+  "service": "SyteLEAN Web Service",
+  "userNotification": true
+}

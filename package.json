@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/weirgroup/mfg-paperless-api-swagger#readme",
   "dependencies": {
-    "api-spec-converter": "^2.10.1"
+    "api-spec-converter": "^2.10.1",
+    "swagger-to-mock": "^0.1.9"
   }
 }

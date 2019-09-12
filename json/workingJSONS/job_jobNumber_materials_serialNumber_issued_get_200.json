@@ -1,0 +1,46 @@
+{
+  "jobNumber": "1A14483",
+  "jobQuantity": 10,
+  "jobItemTraceability": {
+    "lotTracked": true,
+    "serialTracked": true,
+    "serialNumbers": [
+      {
+        "serialNumber": "1904VAS001-2"
+      }
+    ],
+    "lots": [
+      {
+        "lot": "AB123",
+        "expirationDate": "1/1/2020",
+        "quantity": 50
+      }
+    ]
+  },
+  "jobMaterialItems": [
+    {
+      "materialItem": "1P14480",
+      "materialItemTraceability": {
+        "lotTracked": true,
+        "serialTracked": true,
+        "serialNumbers": [
+          {
+            "serialNumber": "1904VAS001-2"
+          }
+        ],
+        "lots": [
+          {
+            "lot": "AB123",
+            "expirationDate": "1/1/2020",
+            "quantity": 50
+          }
+        ]
+      },
+      "quantityPer": 1,
+      "quantityRequired": 1,
+      "quantityIssued": 1,
+      "materialType": "Material",
+      "operation": 10
+    }
+  ]
+}

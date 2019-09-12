@@ -1,0 +1,20 @@
+{
+  "item": "1A14483",
+  "itemTraceability": {
+    "lotTracked": true,
+    "serialTracked": true,
+    "serialNumbers": [
+      {
+        "serialNumber": "1904VAS001-2"
+      }
+    ],
+    "lots": [
+      {
+        "lot": "AB123",
+        "expirationDate": "1/1/2020",
+        "quantity": 50
+      }
+    ]
+  },
+  "locationOnHand": 53
+}
